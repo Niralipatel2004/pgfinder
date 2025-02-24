@@ -1,14 +1,19 @@
 package com.grownited.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.UserEntity;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SessionController{
@@ -70,9 +75,33 @@ public class SessionController{
 		return "Login";
 	}
 	
+	@PostMapping("/authenticate")
+	public String authenticate(String email,String password,Model model) {
 		
+		System.out.println(email);
+		System.out.println(password);
+	Optional<UserEntity> op=repositoryUser.findByEmail(email);
+		if (op.isPresent() ) {
+			//true
+			//email
+			UserEntity dbUser = op.get();
+			
+			 if (encoder.matches(password, dbUser.getPassword())) {
+				return"Home";
 		
+			 }
+				
+			}
+			
+			    
+			
+		model.addAttribute("error", "invalid credentails");
+		return"Login";
 	
 	
-}
+		
+		}	
+	}
+	
+
  
