@@ -76,7 +76,7 @@ public class SessionController{
 	}
 	
 	@PostMapping("/authenticate")
-	public String authenticate(String email,String password,Model model) {
+	public String authenticate(String email,String password,Model model,HttpSession session) {
 		
 		System.out.println(email);
 		System.out.println(password);
@@ -86,21 +86,37 @@ public class SessionController{
 			//email
 			UserEntity dbUser = op.get();
 			
-			 if (encoder.matches(password, dbUser.getPassword())) {
-				return"Home";
+			 //if (encoder.matches(password, dbUser.getPassword())) {
+				//return"Home";
+			boolean ans = encoder.matches(password, dbUser.getPassword());
+			
+			if ( ans==true) {
+				session.setAttribute("user", dbUser);
+				if (dbUser.getRole().equals("ADMIN")) {
+					return"AdminDashboard";
+				}else if (dbUser.getRole().equals("user")) {
+					return"Home";
+				}else {
+					model.addAttribute("error", "please contact admin with error code #123#");
+					return"Login";
+				}
+			}
 		
 			 }
 				
-			}
+			
 			
 			    
 			
 		model.addAttribute("error", "invalid credentails");
 		return"Login";
 	
-	
-		
-		}	
+		}
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return"redirect:/Login";
+	}
 	}
 	
 

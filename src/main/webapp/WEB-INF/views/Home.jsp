@@ -81,7 +81,7 @@
 </html>-->
 
 
-<!DOCTYPE html>
+<!--  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -160,9 +160,9 @@
         }
     </style>
 </head>
-<body>
+<body>-->
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!--   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">PG Finder</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -177,19 +177,19 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>-->
 
     <!-- Hero Section -->
-    <header class="hero">
+   <!--   <header class="hero">
         <div class="container">
             <h1>Find Your Perfect PG</h1>
             <p>Discover the best PGs in your city with ease</p>
             <a href="#listings" class="btn btn-lg btn-primary shadow">Browse Listings</a>
         </div>
-    </header>
+    </header>-->
 
     <!-- Featured PG Listings -->
-    <section id="listings" class="container my-5">
+   <!--  <section id="listings" class="container my-5">
         <h2 class="text-center mb-4">Featured Listings</h2>
         <div class="row">
             <div class="col-md-4 col-sm-6 mb-4">
@@ -223,13 +223,80 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <!-- Footer -->
-    <footer class="footer text-center">
+  <!--   <footer class="footer text-center">
         <p class="mb-0">&copy; 2025 PG Finder. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html>-->
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | PG Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body { background-color: #f8f9fa; }
+        .sidebar { width: 250px; height: 100vh; position: fixed; background: #343a40; color: white; padding-top: 20px; }
+        .sidebar a { display: block; padding: 10px; color: white; text-decoration: none; }
+        .sidebar a:hover { background: #495057; }
+        .content { margin-left: 260px; padding: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h4 class="text-center">PG Finder</h4>
+    <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-user"></i> Profile</a>
+    <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+    <a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center bg-white p-3 shadow-sm rounded">
+            <h2>User Dashboard</h2>
+            <button class="btn btn-dark d-md-none" onclick="toggleSidebar()">☰</button>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Total Bookings</h5>
+                    <p class="display-6"><%= request.getAttribute("totalBookings") %></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Pending Requests</h5>
+                    <p class="display-6"><%= request.getAttribute("pendingRequests") %></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Available PGs</h5>
+                    <p class="display-6"><%= request.getAttribute("availablePGs") %>+</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("d-none");
+    }
+</script>
+
+</body>
